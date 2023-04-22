@@ -43,7 +43,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private RelativeLayout homeRl;
     private ProgressBar loading;
-    private TextView cityName,conditions,temperature,windSpeed,windDir;
+    private TextView cityName,conditions,temperature,windSpeed,windDir,humidity,cloud;
     private TextInputEditText editCity;
     private ImageView backIv,iconIv,searchIv;
     private RecyclerView weather;
@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         conditions = findViewById(R.id.condition);
         windSpeed = findViewById(R.id.windSpeed);
         windDir = findViewById(R.id.windDir);
+        humidity = findViewById(R.id.humidity);
+        cloud = findViewById(R.id.clouds);
 
         iconIv = findViewById(R.id.icon);
         searchIv = findViewById(R.id.search);
@@ -172,6 +174,11 @@ public class MainActivity extends AppCompatActivity {
                     String wind_dir = response.getJSONObject("current").getString("wind_dir");
                     windSpeed.setText(wind_speed+" km/h");
                     windDir.setText(wind_dir);
+
+                    String humidityRate = response.getJSONObject("current").getString("humidity");
+                    String cloudNos = response.getJSONObject("current").getString("cloud");
+                    humidity.setText(humidityRate);
+                    cloud.setText(cloudNos);
 
                     if(isDay==1){
                         Picasso.get().load("https://static.vecteezy.com/system/resources/thumbnails/003/279/108/small/panorama-sky-with-cloud-on-a-sunny-day-free-photo.jpg").into(backIv);
